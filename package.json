@@ -2,5 +2,11 @@
   "dependencies": {
     "@tailwindcss/cli": "^4.1.11",
     "tailwindcss": "^4.1.11"
+  },
+  "scripts": {
+    "build:css": "tailwindcss -i ./src/css/input.css -o ./dist/css/output.css",
+    "build:ts": "tsc",
+    "build": "npm run build:css && npm run build:ts",
+    "copy:html": "cp ./src/index.html dist/"
   }
 }
