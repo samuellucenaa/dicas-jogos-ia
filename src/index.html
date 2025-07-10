@@ -16,27 +16,26 @@
                 <div>
                     <h2 class="font-bold text-[1.6rem] tracking-tight">Pergunte para IA</h2>
                     <p class="text-gray-300 tracking-tight pt-2">Pergunte sobre estratégias e dicas para seus jogos!</p>
-                    <form class="pt-4 flex flex-col">
-                        <input class="border-2 border-gray-500 rounded px-3 py-1 xl:hover:border-gray-700" type="password" placeholder="Digite a API KEY do Gemini" required>
-                        <select class="border-2 border-gray-500 rounded my-6 px-4 py-4 w-[12rem] xl:hover:border-gray-700 cursor-pointer" required>
+                    <form id="form" class="pt-4 flex flex-col">
+                        <input id="input-api-key" class="border-2 border-gray-500 rounded px-3 py-1 xl:hover:border-gray-700" type="password" placeholder="Digite a API KEY do Gemini" required>
+                        <select id="opcoes-jogo" class="border-2 border-gray-500 rounded my-6 px-4 py-4 w-[12rem] xl:hover:border-gray-700 cursor-pointer" required>
                             <option value="">Selecione um jogo</option>
                             <option value="valorant">Valorant</option>
                             <option value="minecraft">Minecraft</option>
                             <option value="lol">League of Legends</option>
                             <option value="csgo">CS:GO</option>
                         </select>
-                        <input class="border-2 border-gray-500 rounded px-4 py-2 xl:hover:border-gray-700" type="text" placeholder="Ex: Qual são as melhores armas do CS:GO" required>
-
-                        <button class="border-2 border-gray-500 bg-gradient-to-l from-blue-950 to-red-500  rounded mt-8 px-4 py-2 xl:cursor-pointer xl:hover:border-gray-700">Perguntar</button>
+                        <input id="campo-prompt" class="border-2 border-gray-500 rounded px-4 py-2 xl:hover:border-gray-700" type="text" placeholder="Ex: Qual são as melhores armas do CS:GO" required>
+                        <button id="botao-perguntar" class="border-2 border-gray-500 bg-gradient-to-l from-blue-950 to-red-500  rounded mt-8 px-4 py-2 xl:cursor-pointer xl:hover:border-gray-700 disabled:cursor-not-allowed disabled:opacity-[0.5]">Perguntar</button>
                     </form>
                     
                     <div id="repostaIa">
-                        <div id="conteudo-resposta"></div>
+
                     </div>
                 </div>
             </section>
         </main>
     </div>
-    <script src="./js/script.js"></script>
+    <script src="./js-teste/script.js"></script>
 </body>
 </html>
