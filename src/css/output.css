@@ -19,6 +19,7 @@
     --spacing: 0.25rem;
     --font-weight-bold: 700;
     --tracking-tight: -0.025em;
+    --animate-pulse: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --font-inter: "Inter", sans-serif;
@@ -176,20 +177,23 @@
   .mx-auto {
     margin-inline: auto;
   }
-  .my-6 {
-    margin-block: calc(var(--spacing) * 6);
+  .my-4 {
+    margin-block: calc(var(--spacing) * 4);
   }
   .mt-8 {
     margin-top: calc(var(--spacing) * 8);
   }
+  .mt-10 {
+    margin-top: calc(var(--spacing) * 10);
+  }
   .mb-12 {
     margin-bottom: calc(var(--spacing) * 12);
   }
+  .contents {
+    display: contents;
+  }
   .flex {
     display: flex;
-  }
-  .table {
-    display: table;
   }
   .h-48 {
     height: calc(var(--spacing) * 48);
@@ -200,20 +204,8 @@
   .w-100 {
     width: calc(var(--spacing) * 100);
   }
-  .w-\[12rem\] {
-    width: 12rem;
-  }
-  .border-collapse {
-    border-collapse: collapse;
-  }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
-  }
-  .cursor-pointer {
-    cursor: pointer;
-  }
-  .resize {
-    resize: both;
   }
   .flex-col {
     flex-direction: column;
@@ -223,10 +215,6 @@
   }
   .rounded-\[12px\] {
     border-radius: 12px;
-  }
-  .border {
-    border-style: var(--tw-border-style);
-    border-width: 1px;
   }
   .border-2 {
     border-style: var(--tw-border-style);
@@ -274,9 +262,6 @@
   .py-2 {
     padding-block: calc(var(--spacing) * 2);
   }
-  .py-4 {
-    padding-block: calc(var(--spacing) * 4);
-  }
   .pt-2 {
     padding-top: calc(var(--spacing) * 2);
   }
@@ -303,26 +288,14 @@
   .text-white {
     color: var(--color-white);
   }
-  .underline {
-    text-decoration-line: underline;
-  }
-  .outline {
-    outline-style: var(--tw-outline-style);
-    outline-width: 1px;
+  .disabled\:animate-pulse {
+    &:disabled {
+      animation: var(--animate-pulse);
+    }
   }
   .disabled\:cursor-not-allowed {
     &:disabled {
       cursor: not-allowed;
-    }
-  }
-  .disabled\:bg-red-700 {
-    &:disabled {
-      background-color: var(--color-red-700);
-    }
-  }
-  .disabled\:opacity-\[0\.5\] {
-    &:disabled {
-      opacity: 0.5;
     }
   }
   .md\:h-54 {
@@ -445,10 +418,10 @@
   syntax: "*";
   inherits: false;
 }
-@property --tw-outline-style {
-  syntax: "*";
-  inherits: false;
-  initial-value: solid;
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
 }
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
@@ -470,7 +443,6 @@
       --tw-gradient-to-position: 100%;
       --tw-font-weight: initial;
       --tw-tracking: initial;
-      --tw-outline-style: solid;
     }
   }
 }
