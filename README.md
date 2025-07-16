@@ -1,4 +1,4 @@
-<h1 style="font-weight: bold;">IA assistente para Jogod</h1>
+<h1 style="font-weight: bold;">IA assistente para Jogos</h1>
 
 <p>Tire suas dúvidas, peça dicas e melhore nos seus jogos usando Inteligência Artificial!</p>
 
@@ -11,12 +11,14 @@
 
 <h2>Instalação</h2>
 
-Clone o projeto no seu computador: <br>
+Para usar:
+
+- Clone o projeto no seu computador <br>
 ```
-git clone
+git clone https://github.com/samuellucenaa/dicas-jogos-ia.git
 ```
 
-Instale as dependências do projeto: <br>
+- Instale as dependências do projeto <br>
 ```
 npm install
 ```
