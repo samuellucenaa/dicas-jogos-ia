@@ -6,6 +6,7 @@
   "scripts": {
     "build:css": "tailwindcss -i ./src/css/input.css -o ./dist/css/output.css",
     "build:ts": "tsc",
-    "build": "npm run build:css && npm run build:ts"
+    "build": "npm run build:css && npm run build:ts",
+    "dev": "tsc --watch & npx tailwindcss -i ./src/css/input.css -o ./dist/css/output.css --watch"
   }
 }
