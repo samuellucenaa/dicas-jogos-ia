@@ -173,6 +173,18 @@
   .relative {
     position: relative;
   }
+  .mx-1 {
+    margin-inline: calc(var(--spacing) * 1);
+  }
+  .mx-2 {
+    margin-inline: calc(var(--spacing) * 2);
+  }
+  .mx-10 {
+    margin-inline: calc(var(--spacing) * 10);
+  }
+  .mx-90 {
+    margin-inline: calc(var(--spacing) * 90);
+  }
   .mx-auto {
     margin-inline: auto;
   }
@@ -194,17 +206,35 @@
   .flex {
     display: flex;
   }
+  .table {
+    display: table;
+  }
   .h-48 {
     height: calc(var(--spacing) * 48);
   }
   .w-48 {
     width: calc(var(--spacing) * 48);
   }
+  .w-80 {
+    width: calc(var(--spacing) * 80);
+  }
+  .w-90 {
+    width: calc(var(--spacing) * 90);
+  }
   .w-100 {
     width: calc(var(--spacing) * 100);
   }
+  .w-auto {
+    width: auto;
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
   .transform {
     transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .resize {
+    resize: both;
   }
   .flex-col {
     flex-direction: column;
@@ -214,6 +244,10 @@
   }
   .rounded-\[12px\] {
     border-radius: 12px;
+  }
+  .border {
+    border-style: var(--tw-border-style);
+    border-width: 1px;
   }
   .border-2 {
     border-style: var(--tw-border-style);
@@ -287,6 +321,13 @@
   .text-white {
     color: var(--color-white);
   }
+  .underline {
+    text-decoration-line: underline;
+  }
+  .outline {
+    outline-style: var(--tw-outline-style);
+    outline-width: 1px;
+  }
   .disabled\:animate-pulse {
     &:disabled {
       animation: var(--animate-pulse);
@@ -295,6 +336,11 @@
   .disabled\:cursor-not-allowed {
     &:disabled {
       cursor: not-allowed;
+    }
+  }
+  .md\:mx-auto {
+    @media (width >= 48rem) {
+      margin-inline: auto;
     }
   }
   .md\:h-54 {
@@ -310,6 +356,11 @@
   .md\:w-120 {
     @media (width >= 48rem) {
       width: calc(var(--spacing) * 120);
+    }
+  }
+  .xl\:mx-auto {
+    @media (width >= 80rem) {
+      margin-inline: auto;
     }
   }
   .xl\:h-70 {
@@ -417,6 +468,11 @@
   syntax: "*";
   inherits: false;
 }
+@property --tw-outline-style {
+  syntax: "*";
+  inherits: false;
+  initial-value: solid;
+}
 @keyframes pulse {
   50% {
     opacity: 0.5;
@@ -442,6 +498,7 @@
       --tw-gradient-to-position: 100%;
       --tw-font-weight: initial;
       --tw-tracking: initial;
+      --tw-outline-style: solid;
     }
   }
 }
