@@ -8,15 +8,12 @@ const respostaIa = document.querySelector('.respostaIa') as HTMLDivElement
 declare const showdown: any
 
 function markdown(texto: string): string {
-    const converter = new showdown.Converter()
+    const converter: any  = new showdown.Converter()
     return converter.makeHtml(texto)
 }
 
-const perguntarAI = async (perguntas: string, jogo:string, apiKey: string) => {
-    const model = 'gemini-2.5-flash'
-    const URl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
-
-    const pergunta = `
+function gerarPrompt(jogo: string, pergunta: string): string {
+    return `
     ## Especialidade
     Você é um especialista assistente de meta para o jogo ${jogo}.
 
@@ -37,19 +34,20 @@ const perguntarAI = async (perguntas: string, jogo:string, apiKey: string) => {
 
     ---------------------------------------
 
-    Aqui está a pergunta do usuário: ${perguntas}
+    Aqui está a pergunta do usuário: ${pergunta}
     `
+}
 
-    const contents = [{
+const perguntarAI = async (pergunta: string, jogo:string, apiKey: string): Promise<string> => {
+    const model: string = 'gemini-2.5-flash'
+    const URl: string = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`
+
+    const contents  = [{
         role: "user",
-        parts: [{
-            text: pergunta
-        }]
+        parts: [{text: gerarPrompt(jogo, pergunta)}]
     }]
 
-    const tools = [{
-        google_search: {}
-    }]
+    const tools = [{google_search: {}}]
 
     const response = await fetch(URl, {
         method: 'POST',
@@ -64,20 +62,25 @@ const perguntarAI = async (perguntas: string, jogo:string, apiKey: string) => {
     
     const dados = await response.json()
 
+    if(!dados.candidates ||
+        !dados.candidates[0]?.content?.parts[0]?.text){
+        throw new Error('Resposta inesperada da API')
+    }
+
     return dados.candidates[0].content.parts[0].text
 }
 
 form.addEventListener('submit', async (event) => {
     event.preventDefault()
 
-    const apiKey = inputApiKey.value
-    const jogoEscolhido = opcoesJogo.value
-    const prompt = campoPrompt.value
+    const apiKey: string = inputApiKey.value
+    const jogoEscolhido: string = opcoesJogo.value
+    const prompt: string = campoPrompt.value
 
     botaoPerguntar.disabled = true
 
     try {
-      const texto = await perguntarAI(prompt, jogoEscolhido, apiKey)
+      const texto: string = await perguntarAI(prompt, jogoEscolhido, apiKey)
       respostaIa.innerHTML = markdown(texto)
     } catch (error) {
         console.log('Erro:', error)

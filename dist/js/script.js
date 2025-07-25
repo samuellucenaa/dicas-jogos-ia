@@ -18,10 +18,8 @@ function markdown(texto) {
     const converter = new showdown.Converter();
     return converter.makeHtml(texto);
 }
-const perguntarAI = (perguntas, jogo, apiKey) => __awaiter(void 0, void 0, void 0, function* () {
-    const model = 'gemini-2.5-flash';
-    const URl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-    const pergunta = `
+function gerarPrompt(jogo, pergunta) {
+    return `
     ## Especialidade
     Você é um especialista assistente de meta para o jogo ${jogo}.
 
@@ -42,17 +40,18 @@ const perguntarAI = (perguntas, jogo, apiKey) => __awaiter(void 0, void 0, void 
 
     ---------------------------------------
 
-    Aqui está a pergunta do usuário: ${perguntas}
+    Aqui está a pergunta do usuário: ${pergunta}
     `;
+}
+const perguntarAI = (pergunta, jogo, apiKey) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a, _b, _c;
+    const model = 'gemini-2.5-flash';
+    const URl = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
     const contents = [{
             role: "user",
-            parts: [{
-                    text: pergunta
-                }]
+            parts: [{ text: gerarPrompt(jogo, pergunta) }]
         }];
-    const tools = [{
-            google_search: {}
-        }];
+    const tools = [{ google_search: {} }];
     const response = yield fetch(URl, {
         method: 'POST',
         headers: {
@@ -64,6 +63,10 @@ const perguntarAI = (perguntas, jogo, apiKey) => __awaiter(void 0, void 0, void 
         })
     });
     const dados = yield response.json();
+    if (!dados.candidates ||
+        !((_c = (_b = (_a = dados.candidates[0]) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.parts[0]) === null || _c === void 0 ? void 0 : _c.text)) {
+        throw new Error('Resposta inesperada da API');
+    }
     return dados.candidates[0].content.parts[0].text;
 });
 form.addEventListener('submit', (event) => __awaiter(void 0, void 0, void 0, function* () {
