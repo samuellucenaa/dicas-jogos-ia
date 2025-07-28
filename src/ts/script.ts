@@ -7,6 +7,22 @@ const respostaIa = document.querySelector('.respostaIa') as HTMLDivElement
 
 declare const showdown: any
 
+interface Text{
+    text: string
+}
+
+interface Parts{
+    parts: Text[]
+}
+
+interface Content{
+    content: Parts
+}
+
+interface RespostaIA{
+    candidates: Content [],
+}
+
 function markdown(texto: string): string {
     const converter: any  = new showdown.Converter()
     return converter.makeHtml(texto)
@@ -60,7 +76,11 @@ const perguntarAI = async (pergunta: string, jogo:string, apiKey: string): Promi
         })
     })
     
-    const dados = await response.json()
+    const dados: RespostaIA = await response.json()
+
+    if(!response.ok){
+        throw new Error(`Erro da API: ${response.status} ${response.statusText} `)
+    }
 
     if(!dados.candidates ||
         !dados.candidates[0]?.content?.parts[0]?.text){

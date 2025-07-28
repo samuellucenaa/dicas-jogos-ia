@@ -63,6 +63,9 @@ const perguntarAI = (pergunta, jogo, apiKey) => __awaiter(void 0, void 0, void 0
         })
     });
     const dados = yield response.json();
+    if (!response.ok) {
+        throw new Error(`Erro da API: ${response.status} ${response.statusText} `);
+    }
     if (!dados.candidates ||
         !((_c = (_b = (_a = dados.candidates[0]) === null || _a === void 0 ? void 0 : _a.content) === null || _b === void 0 ? void 0 : _b.parts[0]) === null || _c === void 0 ? void 0 : _c.text)) {
         throw new Error('Resposta inesperada da API');
