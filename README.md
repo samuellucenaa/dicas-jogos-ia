@@ -5,7 +5,6 @@
 <h2>Tecnologias utilizadas</h2>
 
 - HTML5
-- CSS3
 - TailwindCSS
 - TypeScript
 
