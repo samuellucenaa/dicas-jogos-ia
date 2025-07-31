@@ -8,5 +8,8 @@
     "build:ts": "tsc",
     "build": "npm run build:css && npm run build:ts",
     "dev": "tsc --watch & npx tailwindcss -i ./src/css/input.css -o ./dist/css/output.css --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.2"
   }
 }
